@@ -4,84 +4,90 @@
   <meta charset="utf-8">
   <title>ReMarkdown — HTML that looks like Markdown text</title>
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="assets/demo.css">
+  <link rel="stylesheet" href="dist/remarkdown.css">
+  <link rel="stylesheet" href="demo/demo.css">
 </head>
 <body>
 
-<nav data-rmd>
+<nav class="remarkdown">
   <span>ReMarkdown</span>
+  <br>
   <em>about</em>
-  <a href="styles.html">styles</a>
-  <a href="config.html">config</a>
+  <a href="./styles.html">styles</a>
+  <a href="./customize.html">customize</a>
 </nav>
 
-<main data-rmd="h1-underline h2-underline">
+<main class="remarkdown h1-underline h2-underline">
 
 <h1>
-  You should use ReMarkdown!
+  Make your HTML look like Markdown
 </h1>
 
 <p>
-  Is your HTML content looking all HTML-y and CSS-y? I bet it has great typography and carefully crafted negative space?
-</p>
-<p>
-  <em>Such ennui!</em> Ditch all this <code>@font-face</code> and <code>font-size</code> nonsense, and go with a good old plain text look instead!
+  The text you’re reading right now is not plain text, but simple HTML styled like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
 </p>
 
-<p>
-  That’s what ReMarkdown does: it takes your HTML and makes it look like <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. Pretty nerdy, uh? So the text you’re reading right now is not plain text, it’s good old HTML with H1s and Ps and BLOCKQUOTEs. Just “Inspect Element” and you’ll see.
-</p>
+<h2>
+  Using ReMarkdown
+</h2>
 
 <p>
-  Using ReMarkdown is as simple as downloading <a href="remarkdown.css">remarkdown&shy;.css</a>, and declaring it like this:
+  It’s as simple as downloading <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
 </p>
 
 <pre><code>&lt;!doctype html>
 &lt;html lang="en">
 &lt;head>
   &lt;title>Using ReMarkdown&lt;/title>
-  <b>&lt;link rel="stylesheet" href="remarkdown.css"></b>
+  <b>&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.css"></b>
 &lt;/head>
-&lt;body <b>data-rmd</b>>
+&lt;body <b>class="remarkdown"</b>>
   &lt;h1>Hello World&lt;/h1>
   &lt;p>A paragraph.&lt;/p>
 &lt;/body>
 &lt;/html></code></pre>
 
+<h2>
+  Make it your own
+</h2>
+
 <p>
-  And there’s a bunch of <a href="styles.html">alternative styles</a> to pick from! Define your prefered styles using the <code>data-rmd</code> attribute, or when compiling from the Sass source (see the <a href="config.html">configuration guide</a> for details).
+  ReMarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+</p>
+
+<p>
+  You can choose additional variants by adding option names as classes along the <code>remarkdown</code> class. For example:
+</p>
+
+<pre><code>&lt;body class="remarkdown h1-underline pre-ticks">
+  ...
+&lt;/body></code></pre>
+
+<p>
+  Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
 </p>
 
 <h2>
-  Technicalities
+  Misc info
 </h2>
 
 <ul>
   <li>
-    <a href="https://github.com/fvsch/remarkdown">ReMarkdown is on Github</a>, do <del>complain</del> report bugs there.
+    GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
   </li>
   <li>
-    Copyright: the <a href="LICENSE">WTF Public License</a> applies.
+    npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
   </li>
   <li>
-    Browser support: I’m targetting the most current browsers (mid-2014). Theoretically it should work on IE9+, but that’s a very much untested assertion.
+    Copyright: <a href="https://github.com/fvsch/remarkdown/blob/master/LICENSE">MIT License</a> (1.0 and 2.0 used the <a href="http://www.wtfpl.net/">WTFPL</a>)
   </li>
   <li>
-    This is no HTML-to-Markdown converter. Try <a href="https://pandoc.org/">Pandoc</a>.
+    Browser support: IE11+, and all recent-ish browsers
+  </li>
+  <li>
+    Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
   </li>
 </ul>
-
-<h2>
-  Similar stuff
-</h2>
-
-<p>
-  I’m keeping the <a href="legacy/">legacy ReMarkdown 1.0</a> around; released in 2011, it had partial IE8 support and used a different syntax.
-</p>
-
-<p>
-  Also Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet, a little while back.
-</p>
 
 </main>
 

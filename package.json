@@ -1,11 +1,38 @@
 {
-  "license": "WTFPL",
-  "repository": "fvsch/remarkdown",
+  "name": "remarkdown.css",
+  "version": "3.0.0",
+  "license": "MIT",
+  "author": "Florens Verschelde",
+  "repository": "https://github.com/fvsch/remarkdown",
+  "keywords": [
+    "css",
+    "markdown"
+  ],
+  "files": [
+    "/README.md",
+    "/LICENSE",
+    "/src/*.scss",
+    "/dist/*.css"
+  ],
   "scripts": {
-    "build": "node-sass --output-style=expanded remarkdown.scss > remarkdown-custom.css",
-    "build-demo": "node-sass --output-style=compressed assets/demo.scss > assets/demo.css"
+    "start": "node build"
   },
   "devDependencies": {
-    "node-sass": "^4.0"
+    "glob": "^7.1.2",
+    "node-sass": "^4.0",
+    "prettier": "^1.8.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.scss",
+        "options": {
+          "semi": true,
+          "singleQuote": false
+        }
+      }
+    ]
   }
 }
