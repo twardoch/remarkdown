@@ -1,0 +1,1873 @@
+Project Structure:
+📁 remarkdown
+├── 📁 demo
+│   └── 📄 demo.css
+├── 📁 src
+│   ├── 📄 _imports.scss
+│   ├── 📄 _options.scss
+│   ├── 📄 _styles.scss
+│   └── 📄 _toolkit.scss
+├── 📄 .gitignore
+├── 📄 customize.html
+├── 📄 index.html
+├── 📄 LICENSE
+├── 📄 package.json
+├── 📄 README.md
+└── 📄 styles.html
+
+
+<documents>
+<document index="1">
+<source>.gitattributes</source>
+<document_content>
+.gitattributes  export-ignore
+/demo           export-ignore
+/*.html         export-ignore
+
+</document_content>
+</document>
+
+<document index="2">
+<source>.gitignore</source>
+<document_content>
+node_modules
+package-lock.json
+</document_content>
+</document>
+
+<document index="3">
+<source>LICENSE</source>
+<document_content>
+The MIT License (MIT)
+
+Copyright © 2011–2017 Florens Verschelde
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+</document_content>
+</document>
+
+<document index="4">
+<source>README.md</source>
+<document_content>
+
+# ReMarkdown
+
+ReMarkdown is a stylesheet that makes HTML look like raw Markdown text.
+Take a look at the [online demo and documentation](https://fvsch.github.io/remarkdown/).
+
+Markdown is [a plain-text syntax by John Gruber](https://daringfireball.net/projects/markdown/). This project also takes inspiration from variants such as PHP Markdown Extra and GitHub Flavored Markdown.
+
+## Documentation
+
+- [Using ReMarkdown](https://fvsch.github.io/remarkdown/)
+- [Available styles](https://fvsch.github.io/remarkdown/styles.html)
+- [Customizing ReMarkdown](https://fvsch.github.io/remarkdown/customize.html)
+
+</document_content>
+</document>
+
+<document index="5">
+<source>customize.html</source>
+<document_content>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ReMarkdown — Configuration</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="./dist/remarkdown.css">
+  <link rel="stylesheet" href="./demo/demo.css">
+</head>
+<body>
+
+<nav class="remarkdown">
+  <span>ReMarkdown</span>
+  <br>
+  <a href="./">about</a>
+  <a href="./styles.html">styles</a>
+  <em>customize</em>
+</nav>
+
+<main class="remarkdown h1-underline h2-underline">
+
+<h1>
+  Customizing ReMarkdown
+</h1>
+
+<p>
+  There are three ways to customize ReMarkdown: picking available styles in HTML, adding your own CSS styles, and building ReMarkdown with Sass and custom settings.
+</p>
+
+<h2>
+  Picking styles in HTML
+</h2>
+
+<p>
+  You can activate the <a href="./styles.html">available styles</a> by declaring them in your HTML, as classes or attribute values:
+</p>
+
+<pre><code>&lt;div class="remarkdown h1-underline ul-star">
+  &lt;p>Using remarkdown.css&lt;/p>
+&lt;/div></code></pre>
+
+<h3>
+  ReMarkdown Zero
+</h3>
+
+<p>
+  If you don’t want to use ReMarkdown’s default styles, you can use the <a href="https://unpkg.com/remarkdown.css/dist/remarkdown-zero.css">remarkdown-zero.css</a> stylesheet instead, and declare all the styles you want explicitly.
+</p>
+
+<pre><code>&lt;div class="remarkdown hn-reset hn-hash h1-underline ul-star a-bracket pre-tick quote-gt ...">
+  &lt;p>Using remarkdown.css&lt;/p>
+&lt;/div></code></pre>
+
+<h3>
+  Using attributes instead of classes
+</h3>
+
+<p>
+  ReMarkdown comes with an alternative <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.attr.css">remarkdown.attr.css</a> stylesheet which uses the <code>data-remarkdown</code> attribute for styling, instead of classes:
+</p>
+
+<pre><code>&lt;head>
+  &lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.attr.css">
+  &lt;!-- or https://unpkg.com/remarkdown.css/dist/remarkdown-zero.attr.css -->
+&lt;body data-remarkdown="h1-underline a-bracket ul-plus ol-alpha">
+  ...
+&lt;/body></code></pre>
+
+<h2>
+  Add your own CSS
+</h2>
+
+<p>
+  I strive to make ReMarkdown free of cosmetic choices. For instance, the layout and colors of this demo are <em>not</em> handled by <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>. So you probably want to add a few CSS styles of your own to make the end result prettier. Here are a few suggestions.
+</p>
+
+<h3>
+  Make markers pop out
+</h3>
+
+<pre><code>.remarkdown ::before,
+.remarkdown ::after {
+  color: rgba(255, 0, 0, .5);
+}</code></pre>
+
+<h3>
+  Specify you own fonts
+</h3>
+
+<p>
+  ReMarkdown tells browsers to use their default <code>monospace</code> font, but you can always specify your own, as I did here:
+</p>
+
+<pre><code>/* remarkdown.css must be declared BEFORE this */
+
+.remarkdown {
+  font-family: Menlo, Monaco, "DejaVu Sans Mono",
+    Consolas, monospace;
+}
+.remarkdown pre {
+  font-family: Courier, "Courier New", monospace;
+}</code></pre>
+
+<p>
+  In this example I’m using two different monospace font-stacks, one without serifs (Menlo etc.) and one with slab serifs (Courier etc.), to differentiate between ordinary text and code blocks.
+</p>
+
+<p>
+  You could also use a font that is not monospace. A variable-width font whose design is not too tight (think: NOT HELVETICA) should give interesting results.
+</p>
+
+<h3>
+  Make titles big again
+</h3>
+
+<p>
+  ReMarkdown sets the <code>font-size</code> of headings to <code>1em</code> to better achieve that plain text look (since plain text editors and file formats use the same font size for all text). But if you want big titles anyway, it’s easy:
+</p>
+
+<pre><code>.remarkdown h1 { font-size: 1.5em; }
+.remarkdown h2 { font-size: 1.2em; }</code></pre>
+
+<p>
+  Alternatively, if you’re compiling your own build, there is an option to disallow ReMarkdown from setting any font style.
+</p>
+
+<h3>
+  Beware of selector specificity
+</h3>
+
+<p>
+  Most ReMarkdown selectors have a specificity of <code>0011</code> or in some cases <code>0012</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
+</p>
+
+<pre><code>.remarkdown h1 {
+  /* Selector has a specificity of 0011 */
+}
+.myTitle.myTitle {
+  /* Selector matches and has a specificity of 0020 */
+}
+</code></pre>
+
+<h2 id="custom">
+  Build a custom stylesheet with Sass
+</h2>
+
+<p>
+  You can recompile ReMarkdown using Sass, and there are a number of options (Sass variables) that you can use to alter the CSS output of your custom build.
+</p>
+
+<p>
+  Things you will need:
+</p>
+
+<ol>
+  <li><a href="https://nodejs.org/">Node.js installed</a></li>
+  <li>The <a href="https://github.com/fvsch/remarkdown/archive/master.zip">ReMarkdown source (zip)</a></li>
+</ol>
+
+<p>
+  Once you’ve downloaded and extracted the ReMarkdown source, copy one of the Sass stylesheets in the <code>build</code> directory as <code>build/remarkdown-custom.scss</code>. Change or add <code>$rmd-*</code> variables to change your build’s configuration. See <a href="https://github.com/fvsch/remarkdown/blob/master/src/_options.scss"><code>src/_options.scss</code></a> for a detailed list of options.
+</p>
+
+<p>
+  To compile, use a terminal (Terminal on macOS, cmd.exe or Git Bash on Windows, etc.) and navigate to where the <code>remarkdown.scss</code> file is, and run these commands:
+</p>
+
+<pre><code># install dependencies
+npm install
+# build the dist/remarkdown-custom.css file
+npm start</code></pre>
+
+<p>
+  Note: if you already have your own Node-and-Sass build chain in place, you can install ReMarkdown with <code>npm install remarkdown.css</code> and import <code>node_modules/remarkdown.css/src/imports</code>.
+</p>
+
+<h3>
+  Example: changing the default styles
+</h3>
+
+<p>
+  You can use the <code>$rmd-defaults</code> variable to change the styles that should be applied by default (i.e. when you use the <code>remarkdown</code> class without any explicit style).
+</p>
+
+<pre><code>$rmd-defaults:
+  hn-reset hn-hash h1-underline h2-underline
+  ul-star ol-decimal
+  em-underscore strong-underscore
+  hr-hyphen hr-center;</code></pre>
+
+<p>
+  You will need to list all the styles you want to see apply by default. That can be a fairly long list (as above). For instance, if I omit both <code>em-star</code> and <code>em-underscore</code>, EM elements won’t have any visible marker (unless we explicitly set one of those styles in the HTML code).
+</p>
+
+<h3>
+  Example: only output default styles
+</h3>
+
+<p>
+  By setting the <code>$rmd-output-all-styles</code> option to <code>false</code>, ReMarkdown will only output those styles that are listed in <code>$rmd-defaults</code>. This can be useful if you want to pick a set of default styles, don’t intend to ever use the alternative styles, and want to make a smaller CSS file.
+</p>
+
+<p>
+  Currently the default build with all styles included is close to 8&nbsp;KB, while the same defaults with no alternative styles included is down to 4&nbsp;KB.
+</p>
+
+</main>
+
+</body>
+</html>
+
+</document_content>
+</document>
+
+<document index="6">
+<source>demo/demo.css</source>
+<document_content>
+/**
+ * Styles for ReMarkdown demo pages
+ * Depends on default remarkdown.css
+ */
+
+@media (min-width: 900px) {
+  html {
+    background-color: #EEE;
+  }
+}
+
+body {
+  max-width: 660px;
+  padding: 30px;
+  margin: 0 auto;
+  color: #202020;
+  background-color: white;
+}
+  
+@media (min-width: 900px) {
+  body {
+    margin: 30px auto;
+    padding: 40px 80px;
+    border: 1px solid #DDD;
+    background-color: white;
+    box-shadow: 3px 3px 3px -2px #DDD;
+  }
+}
+
+a {
+  color: #F02050;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid;
+}
+a:focus, a:active {
+  color: white;
+  background-color: #F02050;
+}
+
+nav {
+  margin: 0 0 4em;
+  text-align: right;
+}
+nav > br {
+  display: none;
+}
+nav > span {
+  float: left;
+}
+@media (max-width: 900px) {
+  nav > * { display: block; padding-bottom: .4em; }
+}
+
+.example {
+  margin: 1.5em -30px;
+  padding: .5em 30px;
+  background: #EEF;
+}
+
+/* Make the Markdown-like markers look cool */
+.remarkdown ::before,
+.remarkdown ::after {
+  opacity: .6;
+  color: #205080;
+}
+
+/* Our own font-family. Also setting one for code elements */
+.remarkdown {
+  font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
+}
+
+.remarkdown pre {
+  white-space: pre-wrap;
+  color: #802020;
+  font-family: Courier, "Courier New", monospace;
+}
+
+.remarkdown code {
+  color: #802020;  
+} 
+
+@media (max-width: 700px) {
+  .remarkdown pre {
+    margin-left: 0 !important;
+  }
+}
+
+.remarkdown table {
+  margin: 2.5em 0;
+  font-size: 95%;
+}
+
+/* Styles page */
+
+#style-list tr > * {
+  white-space: nowrap;
+}
+
+</document_content>
+</document>
+
+<document index="7">
+<source>index.html</source>
+<document_content>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ReMarkdown — HTML that looks like Markdown text</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="dist/remarkdown.css">
+  <link rel="stylesheet" href="demo/demo.css">
+</head>
+<body>
+
+<nav class="remarkdown">
+  <span>ReMarkdown</span>
+  <br>
+  <em>about</em>
+  <a href="./styles.html">styles</a>
+  <a href="./customize.html">customize</a>
+</nav>
+
+<main class="remarkdown h1-underline h2-underline">
+
+<h1>
+  Make your HTML look like Markdown
+</h1>
+
+<p>
+  The text you’re reading right now is not plain text, but simple HTML styled like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
+</p>
+
+<h2>
+  Using ReMarkdown
+</h2>
+
+<p>
+  It’s as simple as downloading <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
+</p>
+
+<pre><code>&lt;!doctype html>
+&lt;html lang="en">
+&lt;head>
+  &lt;title>Using ReMarkdown&lt;/title>
+  <b>&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.css"></b>
+&lt;/head>
+&lt;body <b>class="remarkdown"</b>>
+  &lt;h1>Hello World&lt;/h1>
+  &lt;p>A paragraph.&lt;/p>
+&lt;/body>
+&lt;/html></code></pre>
+
+<h2>
+  Make it your own
+</h2>
+
+<p>
+  ReMarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+</p>
+
+<p>
+  You can choose additional variants by adding option names as classes along the <code>remarkdown</code> class. For example:
+</p>
+
+<pre><code>&lt;body class="remarkdown h1-underline pre-ticks">
+  ...
+&lt;/body></code></pre>
+
+<p>
+  Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
+</p>
+
+<h2>
+  Misc info
+</h2>
+
+<ul>
+  <li>
+    GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
+  </li>
+  <li>
+    npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
+  </li>
+  <li>
+    Copyright: <a href="https://github.com/fvsch/remarkdown/blob/master/LICENSE">MIT License</a> (1.0 and 2.0 used the <a href="http://www.wtfpl.net/">WTFPL</a>)
+  </li>
+  <li>
+    Browser support: IE11+, and all recent-ish browsers
+  </li>
+  <li>
+    Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
+  </li>
+</ul>
+
+</main>
+
+</body>
+</html>
+
+</document_content>
+</document>
+
+<document index="8">
+<source>package.json</source>
+<document_content>
+{
+  "name": "remarkdown.css",
+  "version": "3.0.0",
+  "license": "MIT",
+  "author": "Florens Verschelde",
+... (file content truncated to first 5 lines)
+</document_content>
+</document>
+
+<document index="9">
+<source>src/_imports.scss</source>
+<document_content>
+@import "_options.scss";
+@import "_toolkit.scss";
+@import "_styles.scss";
+
+@mixin rmd-output {
+  @include rmd-output-base;
+  @include rmd-output-hn;
+  @include rmd-output-para;
+  @include rmd-output-hr;
+  @include rmd-output-ul;
+  @include rmd-output-ol;
+  @include rmd-output-a;
+  @include rmd-output-em;
+  @include rmd-output-strong;
+  @include rmd-output-code;
+  @include rmd-output-pre;
+  @include rmd-output-quote;
+  @include rmd-output-del;
+  @include rmd-output-table;
+}
+
+</document_content>
+</document>
+
+<document index="10">
+<source>src/_options.scss</source>
+<document_content>
+// ------------------------
+// ReMarkdown build options
+// ------------------------
+
+// Selectors for the ReMarkdown container and options
+// (%o will be replaced with the option name)
+$rmd-selector-base: ".remarkdown" !default;
+$rmd-selector-option: ".remarkdown.%o" !default;
+
+// Whether we should include styles for ALL alternative styles (true),
+// or only for styles listed in $rmd-defaults (false).
+// If false, the CSS build will be smaller, but setting options
+// in HTML with classes or attribute values will be impossible.
+$rmd-output-all-styles: true !default;
+
+// Default style variations.
+// Separate values with whitespace. Remove or comment out options you
+// don't want. Note that all option names are singular:
+// e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
+// prettier-ignore
+$rmd-defaults:
+  hn-reset
+  hn-hash
+  // h1-underline
+  // h2-underline
+  ul-hyphen
+  // ul-star
+  // ul-plus
+  ol-decimal
+  // ol-zero
+  // ol-alpha
+  quote-gt
+  em-star
+  // em-underscore
+  strong-star
+  // strong-underscore
+  a-bracket
+  // a-showurl
+  code-tick
+  pre-indent
+  // pre-tick
+  // pre-tilde
+  // pre-tilde-full
+  hr-star
+  // hr-center
+  // hr-hyphen
+  // del-gfm
+  // table-marker
+!default;
+
+// Should ReMarkdown try to define a font-family, and reset font sizes, styles
+// and weights? It's generally useful but if you want to define your fonts
+// styles separately, set this to false.
+// If false, $rmd-primary-font and $rmd-code-font are ignored.
+$rmd-set-font-styles: true !default;
+
+// Font stack to use.
+// AVOID using "monospace" only, or browsers might use a default small
+// text size (13px). Always define one or more font families before the
+// final ", monospace".
+$rmd-primary-font: monospace, monospace !default;
+
+// For elements that are traditionnaly monospace, use a different font?
+$rmd-code-font: inherit !default;
+
+// Height of a line (as a unit-less ratio, e.g. 1.5)
+$rmd-line-ratio: 1.5 !default;
+
+// Vertical margins for titles and more (as number of lines)
+// By default we use one line for everything, but you can specify more here:
+$rmd-margins: (
+    h1: (top: 1.5, bottom: 1),
+    h2: (top: 1.5, bottom: 1),
+    hn: (top: 1, bottom: 1),
+    hr: (top: 1, bottom: 1),
+    p: (top: 1, bottom: 1),
+    pre: (top: 1, bottom: 1),
+    ol: (top: 1, bottom: 1),
+    ul: (top: 1, bottom: 1),
+    figure: (top: 1, bottom: 1),
+    blockquote: (top: 1, bottom: 1),
+    table: (top: 1, bottom: 1)
+  )
+  !default;
+
+// Horizontal indents (as number of characters) for a few elements
+$rmd-indents: (
+    ul: (left: 4, right: 0),
+    ol: (left: 4, right: 0),
+    pre: (left: 4, right: 0),
+    blockquote: (left: 2, right: 2)
+  )
+  !default;
+
+// By default we use the `em` unit for vertical spacing.
+// This low-level option allows using `rem` instead.
+$rmd-prefer-rem: false !default;
+
+// HR patterns
+$rmd-hr-stars: "* * * *" !default;
+$rmd-hr-hyphens: "-------" !default;
+
+// Character used for simple headings
+$rmd-heading-sign: "#" !default;
+
+// Characters used for undelrlines headings
+$rmd-h1-underline: "==========" !default;
+$rmd-h2-underline: "----------" !default;
+
+</document_content>
+</document>
+
+<document index="11">
+<source>src/_styles.scss</source>
+<document_content>
+// ------------------------------------
+// Basic ReMarkdown styles for elements
+// ------------------------------------
+
+// Base
+
+@mixin rmd-output-base {
+  @include __rmd_selector {
+    line-height: $rmd-line-ratio;
+    @if $rmd-set-font-styles {
+      font-family: $rmd-primary-font;
+      pre,
+      code,
+      kbd,
+      samp {
+        font-family: $rmd-code-font;
+      }
+    }
+  }
+}
+
+// Headings
+// Options: hn-hash, h1-underline, h2-undelrine
+
+@mixin rmd-output-hn {
+  @include __rmd_selector("hn-reset") {
+    h1 {
+      font-size: inherit;
+      font-weight: inherit;
+      margin-top: __rmd-margin("h1", "top");
+      margin-bottom: __rmd-margin("h1", "bottom");
+    }
+    h2 {
+      font-size: inherit;
+      font-weight: inherit;
+      margin-top: __rmd-margin("h2", "top");
+      margin-bottom: __rmd-margin("h2", "bottom");
+    }
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: inherit;
+      font-weight: inherit;
+      margin-top: __rmd-margin("hn", "top");
+      margin-bottom: __rmd-margin("hn", "bottom");
+    }
+  }
+  @include __rmd_selector("hn-hash") {
+    @for $i from 1 through 6 {
+      h#{$i}::before {
+        content: __rmd_repeat($rmd-heading-sign, $i) + " ";
+      }
+    }
+  }
+  %hn-underline-common {
+    display: table;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: $__rmd-line;
+    &::before {
+      content: none;
+    }
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: $__rmd-line;
+      width: 100%;
+      overflow: hidden;
+      word-break: break-all;
+      cursor: default;
+    }
+  }
+  @include __rmd_selector("h1-underline") {
+    h1 {
+      @extend %hn-underline-common;
+      &::after {
+        content: __rmd_repeat($rmd-h1-underline, 12);
+      }
+    }
+  }
+  @include __rmd_selector("h2-underline") {
+    h2 {
+      @extend %hn-underline-common;
+      &::after {
+        content: __rmd_repeat($rmd-h2-underline, 12);
+      }
+    }
+  }
+}
+
+// Paragraphs
+
+@mixin rmd-output-para {
+  @include __rmd_selector {
+    p {
+      margin-top: __rmd-margin("p", "top");
+      margin-bottom: __rmd-margin("p", "bottom");
+    }
+    figure {
+      margin: __rmd-margin("figure", "top") 0 __rmd-margin("figure", "bottom");
+    }
+  }
+}
+
+// Lists
+// Options: ul-star, ul-plus, ul-hyphen
+
+@mixin rmd-output-ul {
+  @include __rmd_selector {
+    ul {
+      margin: __rmd-margin("ul", "top") __rmd-indent("ul", "right")
+        __rmd-margin("ul", "bottom") __rmd-indent("ul", "left");
+      padding: 0;
+    }
+    li ul {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  @mixin rmd-ul-li-before($sign) {
+    & {
+      list-style: none;
+    }
+    & > li::before {
+      float: left;
+      width: 1ch;
+      margin-left: __rmd-indent("ul", "left") * -1;
+      margin-right: 1ch;
+      content: $sign;
+    }
+  }
+  @include __rmd_selector("ul-plus") {
+    ul {
+      @include rmd-ul-li-before("+");
+    }
+  }
+  @include __rmd_selector("ul-star") {
+    ul {
+      @include rmd-ul-li-before("*");
+    }
+  }
+  @include __rmd_selector("ul-hyphen") {
+    ul {
+      @include rmd-ul-li-before("-");
+    }
+  }
+}
+
+@mixin rmd-output-ol {
+  @include __rmd_selector() {
+    ol {
+      margin: __rmd-margin("ol", "top") __rmd-indent("ol", "right")
+        __rmd-margin("ol", "bottom") __rmd-indent("ol", "left");
+      padding: 0;
+    }
+    li ol {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  @mixin rmd-ol-li-before($type) {
+    ol {
+      list-style: none;
+      @if $type != "zero" {
+        counter-reset: rmd-ol;
+      }
+    }
+    @if $type != "zero" {
+      ol > li {
+        counter-increment: rmd-ol;
+      }
+    }
+    ol > li::before {
+      float: left;
+      margin-left: __rmd-indent("ol", "left") * -1;
+      margin-right: 1ch;
+      min-width: 2ch;
+      @if $type == "zero" {
+        content: "0.";
+      } @else if $type == "alpha" {
+        content: counter(rmd-ol, lower-alpha) ".";
+      } @else {
+        content: counter(rmd-ol) ".";
+      }
+    }
+  }
+  @include __rmd_selector("ol-decimal") {
+    @include rmd-ol-li-before("decimal");
+  }
+  @include __rmd_selector("ol-zero") {
+    @include rmd-ol-li-before("zero");
+  }
+  @include __rmd_selector("ol-alpha") {
+    @include rmd-ol-li-before("alpha");
+  }
+}
+
+// Links
+// Options: a-bracket, a-showurl
+
+@mixin rmd-output-a {
+  @include __rmd_selector("a-bracket") {
+    a {
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "]";
+      }
+    }
+  }
+  @include __rmd_selector("a-showurl") {
+    a[href] {
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "](" attr(href) ")";
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+// Emphasis
+// Options: em-star, em-underscore, strong-star, strong-underscore
+
+@mixin rmd-output-em {
+  @if $rmd-set-font-styles {
+    @include __rmd_selector {
+      em,
+      strong {
+        font-style: normal;
+        font-weight: normal;
+      }
+    }
+  }
+  @include __rmd_selector("em-star") {
+    em::before,
+    em::after {
+      content: "*";
+    }
+  }
+  @include __rmd_selector("em-underscore") {
+    em::before,
+    em::after {
+      content: "_";
+    }
+  }
+}
+
+@mixin rmd-output-strong {
+  @include __rmd_selector("strong-star") {
+    strong::before,
+    strong::after {
+      content: "**";
+    }
+  }
+  @include __rmd_selector("strong-underscore") {
+    strong::before,
+    strong::after {
+      content: "__";
+    }
+  }
+}
+
+// Code
+// Options: code-tick
+
+@mixin rmd-output-code {
+  @include __rmd_selector("code-tick") {
+    code::before,
+    code::after {
+      content: "`";
+    }
+    pre code::before,
+    pre code::after {
+      display: none;
+    }
+  }
+}
+
+// PRE
+// Options: pre-indent, pre-tick, pre-tilde, pre-tilde-full
+
+@mixin rmd-output-pre {
+  @include __rmd_selector {
+    pre {
+      margin-top: __rmd-margin("pre", "top");
+      margin-bottom: __rmd-margin("pre", "bottom");
+      tab-size: 4;
+    }
+  }
+  @include __rmd_selector("pre-indent") {
+    pre {
+      margin-left: __rmd-indent("pre", "left");
+      margin-right: __rmd-indent("pre", "right");
+    }
+  }
+  %rmd-pre-fence-pseudo {
+    display: block;
+    width: 100%;
+    height: $__rmd-line;
+    cursor: default;
+  }
+  @include __rmd_selector("pre-tick") {
+    pre::before,
+    pre::after {
+      @extend %rmd-pre-fence-pseudo;
+      content: "```";
+      position: relative;
+      top: 0.25em;
+    }
+  }
+  @include __rmd_selector("pre-tilde") {
+    pre::before,
+    pre::after {
+      @extend %rmd-pre-fence-pseudo;
+      content: "~~~";
+      overflow: hidden;
+      word-break: break-all;
+    }
+  }
+  @include __rmd_selector("pre-tilde-full") {
+    pre::before,
+    pre::after {
+      @extend %rmd-pre-fence-pseudo;
+      content: __rmd_repeat("~~~~~~~~~~", 12);
+      overflow: hidden;
+      word-break: break-all;
+    }
+  }
+}
+
+// Horizontal rules
+// Options: hr-center, hr-star, hr-hyphen
+
+@mixin rmd-output-hr {
+  hr {
+    height: $__rmd-line;
+    line-height: $__rmd-line;
+    margin: __rmd-margin("hr", "top") 0 __rmd-margin("hr", "bottom");
+    border: none;
+    color: inherit;
+  }
+  @include __rmd_selector("hr-center") {
+    hr {
+      text-align: center;
+    }
+  }
+  @include __rmd_selector("hr-star") {
+    hr::before {
+      content: $rmd-hr-stars;
+    }
+  }
+  @include __rmd_selector("hr-hyphen") {
+    hr::before {
+      content: $rmd-hr-hyphens;
+    }
+  }
+}
+
+// Quotes (<q> not managed since not in Markdown)
+// Option: quote-gt
+
+@mixin rmd-output-quote {
+  @include __rmd_selector {
+    blockquote {
+      margin: __rmd-margin("blockquote", "top")
+        __rmd-indent("blockquote", "right") __rmd-margin("blockquote", "bottom")
+        __rmd-indent("blockquote", "left");
+      padding: 0;
+    }
+  }
+  @include __rmd_selector("quote-gt") {
+    blockquote {
+      position: relative;
+    }
+    blockquote::before {
+      position: absolute;
+      top: 0;
+      left: -2ch;
+      bottom: 0;
+      width: 1ch;
+      overflow: hidden;
+      white-space: pre;
+      content: __rmd_repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);
+      cursor: default;
+    }
+  }
+}
+
+// DEL
+// Option: del-gfm
+
+@mixin rmd-output-del {
+  @include __rmd_selector("del-gfm") {
+    del {
+      text-decoration: none;
+    }
+    del::before,
+    del::after {
+      content: "~~";
+    }
+  }
+}
+
+// Tables
+// Option: table-marker
+
+@mixin rmd-output-table {
+  @include __rmd_selector("table-marker") {
+    table {
+      margin-top: __rmd-margin("table", "top");
+      margin-bottom: __rmd-margin("table", "bottom");
+      border-collapse: collapse;
+    }
+    tr > * {
+      min-width: 3ch;
+      position: relative;
+      padding: 0;
+      text-align: inherit;
+      vertical-align: top;
+      font-weight: normal;
+      border: none;
+    }
+    tr > * + * {
+      padding-left: 3ch;
+    }
+    tr:first-child > th:not([scope="row"]) {
+      padding-bottom: $__rmd-line;
+    }
+    tr:first-child > th:not([scope="row"])::after {
+      content: __rmd_repeat("-----------", 10);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      word-break: break-all;
+      height: $__rmd-line;
+    }
+    tr:first-child > * + th:not([scope="row"])::after {
+      left: 3ch;
+    }
+    tr > * + *::before {
+      content: __rmd_repeat("|\A", 10);
+      position: absolute;
+      overflow: hidden;
+      left: 1ch;
+      top: 0;
+      bottom: 0;
+      white-space: pre;
+    }
+  }
+}
+
+</document_content>
+</document>
+
+<document index="12">
+<source>src/_toolkit.scss</source>
+<document_content>
+// ------------------------
+// Utilities for ReMarkdown
+// ------------------------
+
+// Internal variables
+$__rmd-line: $rmd-line-ratio * 1em;
+@if ($rmd-prefer-rem) {
+  $__rmd-line: $rmd-line-ratio * 1rem;
+}
+
+@mixin rmd-header($title:"") {
+  $included: "all styles";
+  $list: $rmd-defaults;
+  @if not $rmd-output-all-styles {
+    $included: "defaults only";
+  }
+  @if not $list or $list == "" or length($list) == 0 {
+    $list: "none";
+  }
+  @if $title {
+    /*! #{$title} */
+    /*
+  Included: #{$included}
+  Defaults: #{$list}
+*/
+  }
+}
+
+// Wrap content in a selector including the option name, depending on
+// the content of $rmd-defaults and the value of $rmd-output-all-styles.
+// May output an unused placeholder selector (%rmd-void) if
+// $rmd-output-all-styles is false and the option is not in
+// $rmd-defaults, which drops the entire block from the output.
+@mixin __rmd_selector($option:null) {
+  @if $option == null or index($rmd-defaults, $option) {
+    #{__rmd_selector_syntax()} {
+      @content;
+    }
+  } @else if $rmd-output-all-styles {
+    #{__rmd_selector_syntax($option)} {
+      @content;
+    }
+  }
+}
+
+// Generate the general selector (if $name is null)
+// or an option-specific selector
+@function __rmd_selector_syntax($option:null) {
+  @if $option == null {
+    @return $rmd-selector-base;
+  } @else {
+    @return __rmd_replace($rmd-selector-option, "%o", $option);
+  }
+}
+
+// Get a margin value in em from $rmd-margins.
+// If not set, returns a value of 1 line.
+@function __rmd-margin($element, $direction:"top") {
+  $config: map-get($rmd-margins, $element);
+  @if $config != null {
+    $num: map-get($config, $direction);
+    @if $num != null {
+      @return $__rmd-line * $num;
+    }
+  }
+  @return $__rmd-line * 1;
+}
+
+// Get a horizontal margin (indent) value for an element.
+// If not set, returns a value of 0.
+@function __rmd-indent($element, $direction:"left") {
+  $config: map-get($rmd-indents, $element);
+  @if $config != null {
+    $num: map-get($config, $direction);
+    @if $num != null {
+      @return 1ch * $num;
+    }
+  }
+  @return 0;
+}
+
+// Small utility to repeat a string
+@function __rmd_repeat($string, $times) {
+  $result: "";
+  @for $i from 1 through $times {
+    $result: $result + $string;
+  }
+  @return $result;
+}
+
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function __rmd_replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + __rmd_replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+</document_content>
+</document>
+
+<document index="13">
+<source>styles.html</source>
+<document_content>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ReMarkdown — Available styles</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="dist/remarkdown.css">
+  <link rel="stylesheet" href="dist/remarkdown-zero.attr.css">
+  <link rel="stylesheet" href="demo/demo.css">
+</head>
+<body>
+
+<nav class="remarkdown">
+  <span>ReMarkdown</span>
+  <br>
+  <a href="./">about</a>
+  <em>styles</em>
+  <a href="./customize.html">customize</a>
+</nav>
+
+<main>
+
+<div class="remarkdown h1-underline h2-underline table-marker">
+  <h1>Demo of available styles</h1>
+  <p>All styles that are listed as “Default” here will be active when using the default <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a> build. No need to specify <code>class="remarkdown style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="./customize.html">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
+
+  <table id="style-list">
+    <tr>
+      <th scope="col">Option name</th>
+      <th scope="col">Default</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><a href="#hn-base">hn-reset</a></td>
+      <td>Yes</td>
+      <td>Reset titles’ font size and weight</td>
+    </tr>
+    <tr>
+      <td><a href="#hn-base">hn-hash</a></td>
+      <td>Yes</td>
+      <td>Add hashes at the start of titles</td>
+    </tr>
+    <tr>
+      <td><a href="#h-underline">h1-underline</a></td>
+      <td>—</td>
+      <td>Underline H1s with equals</td>
+    </tr>
+    <tr>
+      <td><a href="#h-underline">h2-underline</a></td>
+      <td>—</td>
+      <td>Underline H2s with hyphens</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-decimal">ol-decimal</a></td>
+      <td>Yes</td>
+      <td>Use decimal numbers for OL items</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-zero">ol-zero</a></td>
+      <td>—</td>
+      <td>Use zeros for all OL items</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-alpha">ol-alpha</a></td>
+      <td>—</td>
+      <td>Use lowercase letters for OL items</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-hyphen">ul-hyphen</a></td>
+      <td>Yes</td>
+      <td>Use “-” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-star">ul-star</a></td>
+      <td>—</td>
+      <td>Use “*” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-plus">ul-plus</a></td>
+      <td>—</td>
+      <td>Use “+” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#quote-gt">quote-gt</a></td>
+      <td>—</td>
+      <td>Use “&gt;” signs for blockquotes</td>
+    </tr>
+    <tr>
+      <td><a href="#em-star">em-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#em-underscore">em-underscore</a></td>
+      <td>—</td>
+      <td>Use “_” signs for emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#strong-star">strong-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for strong emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#strong-underscore">strong-underscore</a></td>
+      <td>—</td>
+      <td>Use “_” signs for strong emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#a-bracket">a-bracket</a></td>
+      <td>Yes</td>
+      <td>Add square brackets around links.</td>
+    </tr>
+    <tr>
+      <td><a href="#a-showurl">a-showurl</a></td>
+      <td>—</td>
+      <td>Show URLs after links</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-star">hr-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for HR</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-hyphen">hr-hyphen</a></td>
+      <td>—</td>
+      <td>Use “-” signs for HR</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-center">hr-center</a></td>
+      <td>—</td>
+      <td>Horizontally center the HR</td>
+    </tr>
+    <tr>
+      <td><a href="#code-tick">code-tick</a></td>
+      <td>Yes</td>
+      <td>Wrap CODE in “`” (backticks)</td>
+    </tr>
+    <tr>
+      <td><a href="#pre-indent">pre-indent</a></td>
+      <td>Yes</td>
+      <td>Left indent PRE elements</td>
+    </tr>
+    <tr>
+      <td><a href="#pre-tick">pre-tick</a></td>
+      <td>—</td>
+      <td>Wraps PRE in “```”</td>
+    </tr>
+    <tr>
+      <td><a href="#pre-tilde">pre-tilde</a></td>
+      <td>—</td>
+      <td>Wraps PRE in “~~~”</td>
+    </tr>
+    <tr>
+      <td><a href="#pre-tilde-full">pre-tilde-full</a></td>
+      <td>—</td>
+      <td>Wraps PRE in a full line of “~”</td>
+    </tr>
+    <tr>
+      <td><a href="#del-gfm">del-gfm</a></td>
+      <td>—</td>
+      <td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
+    </tr>
+    <tr>
+      <td><a href="#table-marker">table-marker</a></td>
+      <td>—</td>
+      <td>Add markers to TABLE (<a href="https://michelf.ca/projects/php-markdown/extra/#table">syntax</a>)</td>
+    </tr>
+  </table>
+
+  <h2>Headings</h2>
+  <h3 id="hn-base">Defaults: <code>hn-reset</code> and <code>hn-hash</code></h3>
+  <p>Note: next examples will all use <code>hn-reset</code>.</p>
+</div>
+
+<div class="example" data-remarkdown="hn-reset hn-hash">
+  <h1>Heading level 1</h1>
+  <h2>Heading level 2</h2>
+  <h3>Heading level 3</h3>
+  <h4>Heading level 4</h4>
+  <h5>Heading level 5</h5>
+  <h6>Heading level 6</h6>
+</div>
+
+<div class="remarkdown">
+  <h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
+</div>
+
+<div class="example" data-remarkdown="hn-reset h1-underline h2-underline">
+  <h1>Underlined H1</h1>
+  <h2>Underlined H2</h2>
+  <p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
+  <h1 style="margin-left: auto; margin-right: auto;">
+    Underlined H1
+  </h1>
+  <h2 style="margin-left: auto;">
+    Underlined H2
+  </h2>
+  <p>Note that titles on two lines may not look that great:</p>
+  <h2>
+    A long title: Possimus officia, ducimus nihil beatae dolore vitae, perspiciatis ex quaerat placeat, perferendis
+  </h2>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Lists</h2>
+  <h3 id="ol-decimal">Default: <code>ol-decimal</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ol-decimal">
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.
+      <ol>
+        <li>Nested lists work too.</li>
+        <li>This is so cool.</li>
+      </ol>
+    </li>
+    <li>And a third one.</li>
+  </ol>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ol-zero">Option: <code>ol-zero</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ol-zero">
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ol>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ol-alpha">Option: <code>ol-alpha</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ol-alpha">
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ol>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ul-hyphen">
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.
+      <ul>
+        <li>Nested lists work too.</li>
+        <li>This is so cool.</li>
+      </ul>
+    </li>
+    <li>And a third one.</li>
+  </ul>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ul-star">Option: <code>ul-star</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ul-star">
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ul>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ul-plus">Option: <code>ul-plus</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ul-plus">
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ul>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Blockquotes</h2>
+  <h3 id="quote-gt">Default: <code>quote-gt</code></h3>
+</div>
+
+<div class="example" data-remarkdown="quote-gt">
+  <blockquote>
+    <p>Saepe blanditiis ratione ipsum tempore quam aspernatur at doloremque deleniti minima commodi. Impedit, assumenda.</p>
+    <p>Here comes a second paragraph.</p>
+  </blockquote>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Emphasis</h2>
+  <h3 id="em-star">Default: <code>em-star</code></h3>
+</div>
+
+<div class="example" data-remarkdown="em-star">
+  <p>This is <em>literally</em> figurative!</p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="em-underscore">Option: <code>em-underscore</code></h3>
+</div>
+
+<div class="example" data-remarkdown="em-underscore">
+  <p>This is <em>literally</em> figurative!</p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="strong-star">Default: <code>strong-star</code></h3>
+</div>
+
+<div class="example" data-remarkdown="strong-star">
+  <p>This is figurative. <strong>Literally.</strong></p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
+</div>
+
+<div class="example" data-remarkdown="strong-underscore">
+  <p>This is figurative. <strong>Literally.</strong></p>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Links</h2>
+  <h3 id="a-bracket">Default: <code>a-bracket</code></h3>
+</div>
+
+<div class="example" data-remarkdown="a-bracket">
+  <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+  and let me play among the stars.
+  Let me see what spring is like
+  on a-Jupiter and Mars.</p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="a-showurl">Option: <code>a-showurl</code></h3>
+</div>
+
+<div class="example" data-remarkdown="a-showurl">
+  <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+  and let me play among the stars.
+  Let me see what spring is like
+  on a-Jupiter and Mars.</p>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Horizontal rules</h2>
+  <h3 id="hr-star">Default: <code>hr-star</code></h3>
+</div>
+
+<div class="example" data-remarkdown="hr-star">
+  <hr>
+</div>
+
+<div class="remarkdown">
+  <h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
+</div>
+
+<div class="example" data-remarkdown="hr-hyphen">
+  <hr>
+</div>
+
+<div class="remarkdown">
+  <h3 id="hr-center">Option: <code>hr-center</code></h3>
+</div>
+
+<div class="example">
+  <div data-remarkdown="hr-center hr-star"><hr></div>
+  <div data-remarkdown="hr-center hr-hyphen"><hr></div>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Code and code blocks</h2>
+  <h3 id="code-tick">Default: <code>code-tick</code></h3>
+</div>
+
+<div class="example" data-remarkdown="code-tick">
+  <p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="pre-indent">Default: <code>pre-indent</code></h3>
+</div>
+
+<div class="example" data-remarkdown="pre-indent">
+  <p>A paragraph.</p>
+  <pre><code>pre {
+  margin-left: 3ch;
+  tab-size: 4;
+}</code></pre>
+  <p>Another paragraph.</p>
+</div>
+
+<div class="remarkdown">
+  <h3 id="pre-tick">Option: <code>pre-tick</code></h3>
+</div>
+
+<div class="example" data-remarkdown="pre-tick">
+  <pre><code>A code block</code></pre>
+</div>
+
+<div class="remarkdown">
+  <h3 id="pre-tilde">Option: <code>pre-tilde</code></h3>
+</div>
+
+<div class="example" data-remarkdown="pre-tilde">
+  <pre><code>A code block</code></pre>
+</div>
+
+<div class="remarkdown">
+  <h3 id="pre-tilde-full">Option: <code>pre-tilde-full</code></h3>
+</div>
+
+<div class="example" data-remarkdown="pre-tilde-full">
+  <pre><code>A code block</code></pre>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Other</h2>
+  <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
+</div>
+
+<div class="example" data-remarkdown="del-gfm">
+  <p>This is <del>a mistake</del> awesome.</p>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Tables</h2>
+  <h3 id="table-marker">Option: <code>table-marker</code></h3>
+</div>
+
+<div class="example" data-remarkdown="table-marker">
+  <p>Not too bad for column headers:</p>
+  <table>
+    <tr>
+      <th scope="col">Col 1</th>
+      <th scope="col">Col 2</th>
+      <th scope="col">Col 3</th>
+    </tr>
+    <tr>
+      <td>Lorem ipsum</td>
+      <td>Dolor sit amet</td>
+      <td>Consectetur adipisicing elit</td>
+    </tr>
+    <tr>
+      <td>Quae enim corrupti</td>
+      <td>Excepturi laudantium molestiae nam</td>
+      <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
+    </tr>
+  </table>
+  <p>Row headers don’t have a markers:</p>
+  <table>
+    <tr>
+      <th scope="row">Row 1</th>
+      <td>Lorem ipsum</td>
+      <td>Dolor sit amet</td>
+      <td>Consectetur adipisicing elit</td>
+    </tr>
+    <tr>
+      <th scope="row">Row 2</th>
+      <td>Quae enim corrupti</td>
+      <td>Excepturi laudantium molestiae nam</td>
+      <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
+    </tr>
+  </table>
+  <p>Multiplication table! (Note: the cell centered alignment is not part of ReMarkdown.)</p>
+  <table style="text-align:center;">
+    <tr>
+      <td></td>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">4</th>
+      <th scope="col">5</th>
+      <th scope="col">6</th>
+      <th scope="col">7</th>
+      <th scope="col">8</th>
+      <th scope="col">9</th>
+      <th scope="col">10</th>
+    </tr>
+    <tr>
+      <th scope="row">1</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>8</td>
+      <td>10</td>
+      <td>12</td>
+      <td>14</td>
+      <td>16</td>
+      <td>18</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>9</td>
+      <td>12</td>
+      <td>15</td>
+      <td>18</td>
+      <td>21</td>
+      <td>24</td>
+      <td>27</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>4</td>
+      <td>8</td>
+      <td>12</td>
+      <td>16</td>
+      <td>20</td>
+      <td>24</td>
+      <td>28</td>
+      <td>32</td>
+      <td>36</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>5</td>
+      <td>10</td>
+      <td>15</td>
+      <td>20</td>
+      <td>25</td>
+      <td>30</td>
+      <td>35</td>
+      <td>40</td>
+      <td>45</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>6</td>
+      <td>12</td>
+      <td>18</td>
+      <td>24</td>
+      <td>30</td>
+      <td>36</td>
+      <td>42</td>
+      <td>48</td>
+      <td>54</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>7</td>
+      <td>14</td>
+      <td>21</td>
+      <td>28</td>
+      <td>35</td>
+      <td>42</td>
+      <td>49</td>
+      <td>56</td>
+      <td>63</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>8</td>
+      <td>16</td>
+      <td>24</td>
+      <td>32</td>
+      <td>40</td>
+      <td>48</td>
+      <td>56</td>
+      <td>64</td>
+      <td>72</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>9</td>
+      <td>18</td>
+      <td>27</td>
+      <td>36</td>
+      <td>45</td>
+      <td>54</td>
+      <td>63</td>
+      <td>72</td>
+      <td>81</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>10</td>
+      <td>20</td>
+      <td>30</td>
+      <td>40</td>
+      <td>50</td>
+      <td>60</td>
+      <td>70</td>
+      <td>80</td>
+      <td>90</td>
+      <td>100</td>
+    </tr>
+  </table>
+</div>
+
+</main>
+
+</body>
+</html>
+
+</document_content>
+</document>
+
+</documents>
